@@ -1,0 +1,15 @@
+services:
+  database:
+    container_name: soundvault_db
+    image: postgres:alpine
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
