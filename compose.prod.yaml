@@ -1,0 +1,8 @@
+services:
+  app:
+    container_name: soundvault_back
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '6510:3000'
