@@ -1,11 +1,16 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import vine from '@vinejs/vine'
 import User from '#users/models/user'
+import string from '@adonisjs/core/helpers/string'
 
 export default class RegisterController {
   static validator = vine.compile(
     vine.object({
-      username: vine.string().minLength(3).maxLength(20),
+      username: vine
+        .string()
+        .minLength(3)
+        .maxLength(20)
+        .unique((db) => db.from('users').select('username')),
       email: vine.string().email(),
       password: vine.string().minLength(8),
       confirmPassword: vine.string().confirmed({ confirmationField: 'password' }),
@@ -17,7 +22,10 @@ export default class RegisterController {
 
     const { confirmPassword, ...userData } = data
 
-    const user = await User.create(userData)
+    const user = await User.create({
+      ...userData,
+      slug: string.slug(userData.username),
+    })
     const token = await auth.use('api').createToken(user)
 
     return response.json({

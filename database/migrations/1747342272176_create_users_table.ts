@@ -5,12 +5,13 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.uuid('id').primary()
+      table.string('id', 26).primary()
       table.string('username').notNullable().unique()
       table.string('email', 254).notNullable().unique()
       table.string('password').notNullable()
       table.string('bio').nullable()
-      table.string('image').nullable()
+      table.string('avatar_url').nullable()
+      table.string('slug').notNullable().unique()
 
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').nullable()

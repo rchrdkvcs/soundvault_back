@@ -3,6 +3,21 @@ import { defineConfig } from '@adonisjs/core/app'
 export default defineConfig({
   /*
   |--------------------------------------------------------------------------
+  | Experimental flags
+  |--------------------------------------------------------------------------
+  |
+  | The following features will be enabled by default in the next major release
+  | of AdonisJS. You can opt into them today to avoid any breaking changes
+  | during upgrade.
+  |
+  */
+  experimental: {
+    mergeMultipartFieldsAndFiles: true,
+    shutdownInReverseOrder: true,
+  },
+
+  /*
+  |--------------------------------------------------------------------------
   | Commands
   |--------------------------------------------------------------------------
   |
@@ -31,8 +46,8 @@ export default defineConfig({
     () => import('@adonisjs/core/providers/vinejs_provider'),
     () => import('@adonisjs/cors/cors_provider'),
     () => import('@adonisjs/lucid/database_provider'),
-    () => import('@adonisjs/session/session_provider'),
     () => import('@adonisjs/auth/auth_provider'),
+    () => import('@adonisjs/drive/drive_provider')
   ],
 
   /*
@@ -69,11 +84,4 @@ export default defineConfig({
     ],
     forceExit: false,
   },
-
-  metaFiles: [
-    {
-      pattern: './swagger.yml',
-      reloadServer: false,
-    },
-  ],
 })

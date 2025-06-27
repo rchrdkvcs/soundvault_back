@@ -1,9 +1,11 @@
 import router from '@adonisjs/core/services/router'
 
-const GetUsersController = () => import('#users/controllers/get_users_controller')
+const ListUsersController = () => import('#users/controllers/list_users_controller')
 
-router
-  .group(() => {
-    router.get('/', [GetUsersController, 'execute'])
-  })
-  .prefix('users')
+export default function usersRoutes() {
+  router
+    .group(() => {
+      router.get('/', [ListUsersController, 'execute'])
+    })
+    .prefix('users')
+}
