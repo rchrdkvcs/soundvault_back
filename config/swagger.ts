@@ -7,7 +7,7 @@ export default {
   title: 'SoundVault API',
   version: '0.0.0',
   description: 'API du projet SoundVault',
-  tagIndex: 2,
+  tagIndex: 1,
   productionEnv: 'production',
   info: {
     title: 'SoundVault API',
