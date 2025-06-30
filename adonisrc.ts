@@ -83,11 +83,4 @@ export default defineConfig({
     ],
     forceExit: false,
   },
-
-  metaFiles: [
-    {
-      pattern: 'swagger.yml',
-      reloadServer: false,
-    },
-  ],
 })
