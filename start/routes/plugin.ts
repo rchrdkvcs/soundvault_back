@@ -1,7 +1,6 @@
 import router from '@adonisjs/core/services/router'
 
-const StorePluginController = () =>
-  import('../../app/plugins/controllers/store_plugin_controller.js')
+const StorePluginController = () => import('#plugins/controllers/store_plugin_controller')
 
 export default function pluginRoutes() {
   router

@@ -38,8 +38,6 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
-<<<<<<<< HEAD:app/models/user.ts
-========
 
   static accessTokens = DbAccessTokensProvider.forModel(User)
 
@@ -47,5 +45,4 @@ export default class User extends compose(BaseModel, AuthFinder) {
   static generateUuid(user: User) {
     user.id = ulid()
   }
->>>>>>>> 8998445 (refactor: reorganize project structure and implement initial routes for authentication, plugins, and categories):app/users/models/user.ts
 }
