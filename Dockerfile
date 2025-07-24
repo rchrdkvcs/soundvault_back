@@ -22,7 +22,9 @@ WORKDIR /app
 COPY --from=deps /app/node_modules /app/node_modules
 ADD . .
 
+RUN node ace docs:generate
 RUN node ace build --ignore-ts-errors
+RUN cp swagger.yml build/swagger.yml
 
 # Production stage
 FROM base
