@@ -3,13 +3,14 @@ import Plugin from '#plugins/models/plugin'
 
 export default class ShowPluginController {
   /**
-   * @showPlugin
-   * @description Récupère les détails d'un plugin par son ID
+   * @summary Détails d'un plugin
+   * @tag Plugins
+   * @description Récupère les détails complets d'un plugin par son ID
    * @paramPath id - string - ID du plugin
-   * @responseBody 200 - <PluginDetailResponse>
+   * @responseBody 200 - {"success": true, "data": {"id": "string", "name": "string", "description": "string", "version": "string", "price": 0, "author": {}, "categories": [], "tags": [], "images": [], "downloadCount": 0, "createdAt": "datetime"}}
    * @responseBody 404 - {"success": false, "message": "Plugin introuvable"}
    */
-  async execute({ params, response }: HttpContext) {
+  async show({ params, response }: HttpContext) {
     try {
       const plugin = await Plugin.query()
         .where('id', params.id)

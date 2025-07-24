@@ -7,9 +7,9 @@ const ListUserPluginsController = () => import('#users/controllers/list_user_plu
 export default function userRoutes() {
   router
     .group(() => {
-      router.get('/', [ListUsersController, 'execute'])
-      router.get('/:id', [ShowUserController, 'execute'])
-      router.get('/:id/plugins', [ListUserPluginsController, 'execute'])
+      router.get('/', [ListUsersController, 'index'])
+      router.get('/:id', [ShowUserController, 'show'])
+      router.get('/:id/plugins', [ListUserPluginsController, 'index'])
     })
     .prefix('users')
 }

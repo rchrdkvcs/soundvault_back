@@ -4,14 +4,15 @@ import drive from '@adonisjs/drive/services/main'
 
 export default class DownloadPluginController {
   /**
-   * @downloadPlugin
-   * @description Télécharge un fichier plugin
+   * @summary Télécharge un fichier plugin
+   * @tag Plugins
+   * @description Télécharge le fichier VST/plugin associé à un plugin
    * @paramPath id - string - ID du plugin
    * @responseBody 200 - Plugin file stream
    * @responseBody 404 - {"success": false, "message": "Plugin introuvable"}
    * @responseBody 401 - {"success": false, "message": "Unauthorized"}
    */
-  async execute({ params, response, auth }: HttpContext) {
+  async show({ params, response, auth }: HttpContext) {
     try {
       // Vérification de l'authentification
       await auth.authenticate()

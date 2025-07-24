@@ -4,13 +4,14 @@ import Plugin from '#plugins/models/plugin'
 
 export default class ShowUserController {
   /**
-   * @showUser
+   * @summary Profil utilisateur
+   * @tag Users
    * @description Récupère le profil public d'un utilisateur avec ses plugins
    * @paramPath id - string - ID ou slug de l'utilisateur
-   * @responseBody 200 - <UserProfileResponse>
+   * @responseBody 200 - {"success": true, "data": {"id": "string", "username": "string", "slug": "string", "bio": "string", "avatarUrl": "string", "pluginCount": 0, "plugins": [], "joinedAt": "datetime"}}
    * @responseBody 404 - {"success": false, "message": "Utilisateur introuvable"}
    */
-  async execute({ params, response }: HttpContext) {
+  async show({ params, response }: HttpContext) {
     try {
       const user = await User.query().where('id', params.id).orWhere('slug', params.id).first()
 

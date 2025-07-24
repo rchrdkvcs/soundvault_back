@@ -10,14 +10,14 @@ export default function pluginRoutes() {
   router
     .group(() => {
       // Routes publiques
-      router.get('/', [ListPluginsController, 'execute'])
-      router.get('/:id', [ShowPluginController, 'execute'])
+      router.get('/', [ListPluginsController, 'index'])
+      router.get('/:id', [ShowPluginController, 'show'])
 
       // Routes protégées
       router
         .group(() => {
-          router.post('/', [StorePluginController, 'execute'])
-          router.get('/:id/download', [DownloadPluginController, 'execute'])
+          router.post('/', [StorePluginController, 'store'])
+          router.get('/:id/download', [DownloadPluginController, 'show'])
         })
         .use(middleware.auth())
     })

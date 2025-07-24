@@ -3,13 +3,14 @@ import Category from '#categories/models/category'
 
 export default class ShowCategoryController {
   /**
-   * @showCategory
+   * @summary Détails d'une catégorie
+   * @tag Categories
    * @description Récupère les détails d'une catégorie avec ses plugins
    * @paramPath id - string - ID de la catégorie
-   * @responseBody 200 - <CategoryDetailResponse>
+   * @responseBody 200 - {"success": true, "data": {"id": "string", "label": "string", "description": "string", "pluginCount": 0, "plugins": [], "createdAt": "datetime", "updatedAt": "datetime"}}
    * @responseBody 404 - {"success": false, "message": "Catégorie introuvable"}
    */
-  async execute({ params, response }: HttpContext) {
+  async show({ params, response }: HttpContext) {
     try {
       const category = await Category.query()
         .where('id', params.id)

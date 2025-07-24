@@ -6,10 +6,11 @@ import drive from '@adonisjs/drive/services/main'
 
 export default class StorePluginController {
   /**
-   * @createPlugin
-   * @description Crée un nouveau plugin
-   * @requestBody <CreatePluginRequest>
-   * @responseBody 201 - <PluginCreatedResponse>
+   * @summary Crée un nouveau plugin
+   * @tag Plugins
+   * @description Crée un nouveau plugin avec fichiers et métadonnées
+   * @requestBody {"name": "string", "description": "string", "version": "string", "categoryId": "string", "price": 0, "isFree": true, "vstFile": "file", "coverImage": "file", "tags": ["string"], "features": ["string"]}
+   * @responseBody 201 - {"success": true, "message": "Plugin créé avec succès", "data": {}}
    * @responseBody 400 - {"success": false, "message": "Validation failed"}
    * @responseBody 401 - {"success": false, "message": "Unauthorized"}
    */
@@ -25,7 +26,7 @@ export default class StorePluginController {
       // Pricing
       price: vine
         .string()
-        .transform((value) => parseFloat(value) * 100)
+        .transform((value) => Number.parseFloat(value) * 100)
         .optional(), // Convert to centimes
       isFree: vine.string().transform((value) => value === 'true'),
 
@@ -71,7 +72,7 @@ export default class StorePluginController {
     })
   )
 
-  async execute({ request, response, auth }: HttpContext) {
+  async store({ request, response, auth }: HttpContext) {
     try {
       const author = await auth.authenticate()
 

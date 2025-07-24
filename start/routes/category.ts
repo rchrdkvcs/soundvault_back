@@ -7,9 +7,9 @@ const ShowCategoryController = () => import('#categories/controllers/show_catego
 export default function categoryRoutes() {
   router
     .group(() => {
-      router.get('/', [ListCategoriesController, 'execute'])
-      router.get('/:id', [ShowCategoryController, 'execute'])
-      router.post('/', [StoreCategoryController, 'execute'])
+      router.get('/', [ListCategoriesController, 'index'])
+      router.get('/:id', [ShowCategoryController, 'show'])
+      router.post('/', [StoreCategoryController, 'store'])
     })
     .prefix('categories')
 }

@@ -3,11 +3,12 @@ import User from '#users/models/user'
 
 export default class ListUsersController {
   /**
-   * @listUsers
+   * @summary Liste des utilisateurs
+   * @tag Users
    * @description Récupère la liste de tous les utilisateurs
-   * @responseBody 200 - <UsersListResponse>
+   * @responseBody 200 - [{"id": "string", "username": "string", "email": "string", "slug": "string", "bio": "string", "avatarUrl": "string", "createdAt": "datetime", "updatedAt": "datetime"}]
    */
-  public async execute({ response }: HttpContext) {
+  public async index({ response }: HttpContext) {
     const users = await User.query()
 
     return response.json(users)

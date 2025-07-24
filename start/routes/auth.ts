@@ -8,10 +8,10 @@ const LogoutController = () => import('#auth/controllers/logout_controller')
 export default function authRoutes() {
   router
     .group(() => {
-      router.get('/me', [MeController, 'execute'])
-      router.post('/register', [RegisterController, 'execute'])
-      router.post('/login', [LoginController, 'execute'])
-      router.delete('/logout', [LogoutController, 'execute'])
+      router.get('/me', [MeController, 'show'])
+      router.post('/register', [RegisterController, 'store'])
+      router.post('/login', [LoginController, 'store'])
+      router.delete('/logout', [LogoutController, 'destroy'])
     })
     .prefix('auth')
 }

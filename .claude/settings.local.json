@@ -8,7 +8,9 @@
       "Bash(ls:*)",
       "Bash(cat:*)",
       "Bash(rm:*)",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "WebFetch(domain:packages.adonisjs.com)",
+      "WebFetch(domain:github.com)"
     ],
     "deny": []
   }

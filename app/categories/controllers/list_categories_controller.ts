@@ -3,12 +3,13 @@ import Category from '#categories/models/category'
 
 export default class ListCategoriesController {
   /**
-   * @listCategories
+   * @summary Liste des catégories
+   * @tag Categories
    * @description Récupère la liste de toutes les catégories avec le nombre de plugins
-   * @responseBody 200 - <CategoriesListResponse>
+   * @responseBody 200 - {"success": true, "data": [{"id": "string", "label": "string", "description": "string", "pluginCount": 0, "createdAt": "datetime", "updatedAt": "datetime"}]}
    * @responseBody 500 - {"success": false, "message": "Erreur serveur"}
    */
-  async execute({ response }: HttpContext) {
+  async index({ response }: HttpContext) {
     try {
       const categories = await Category.query()
         .preload('plugins', (query) => {

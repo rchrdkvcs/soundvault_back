@@ -10,13 +10,14 @@ export default class StoreCategoryController {
   )
 
   /**
-   * @createCategory
-   * @description Crée une nouvelle catégorie
-   * @requestBody <CreateCategoryRequest>
-   * @responseBody 201 - <CategoryCreatedResponse>
+   * @summary Crée une nouvelle catégorie
+   * @tag Categories
+   * @description Crée une nouvelle catégorie de plugins
+   * @requestBody {"label": "string"}
+   * @responseBody 201 - {"message": "Category created successfully", "data": {}}
    * @responseBody 422 - {"success": false, "message": "Validation failed"}
    */
-  async execute({ request, response }: HttpContext) {
+  async store({ request, response }: HttpContext) {
     const data = await request.validateUsing(StoreCategoryController.validator)
 
     const category = await Category.create({
