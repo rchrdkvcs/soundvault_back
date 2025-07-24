@@ -27,3 +27,5 @@ yarn-error.log
 # Swagger auto-generated files
 swagger.json
 swagger.yml
+
+storage

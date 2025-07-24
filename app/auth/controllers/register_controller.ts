@@ -10,8 +10,17 @@ export default class RegisterController {
         .string()
         .minLength(3)
         .maxLength(20)
-        .unique((db) => db.from('users').select('username')),
-      email: vine.string().email(),
+        .unique(async (db, value) => {
+          const user = await db.from('users').where('username', value).first()
+          return !user
+        }),
+      email: vine
+        .string()
+        .email()
+        .unique(async (db, value) => {
+          const user = await db.from('users').where('email', value).first()
+          return !user
+        }),
       password: vine.string().minLength(8),
       confirmPassword: vine.string().confirmed({ confirmationField: 'password' }),
     })
