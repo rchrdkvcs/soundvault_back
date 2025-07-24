@@ -22,7 +22,6 @@ WORKDIR /app
 COPY --from=deps /app/node_modules /app/node_modules
 ADD . .
 
-RUN node ace docs:generate
 RUN node ace build --ignore-ts-errors
 
 # Production stage
@@ -31,8 +30,6 @@ WORKDIR /app
 
 COPY --from=production-deps /app/node_modules /app/node_modules
 COPY --from=build /app/build /app
-COPY --from=build /app/swagger.json /app/
-COPY --from=build /app/swagger.yml /app/
 
 EXPOSE 3333
 CMD ["node", "./bin/server.js"]

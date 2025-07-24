@@ -1,0 +1,333 @@
+openapi: "3.0.0"
+info:
+  title: "SoundVault API"
+  version: "0.1.4"
+  description: "API du projet SoundVault"
+components:
+  responses:
+    Forbidden:
+      description: "Access token is missing or invalid"
+    Accepted:
+      description: "The request was accepted"
+    Created:
+      description: "The resource has been created"
+    NotFound:
+      description: "The resource has been created"
+    NotAcceptable:
+      description: "The resource has been created"
+  securitySchemes:
+    BearerAuth:
+      type: "http"
+      scheme: "bearer"
+    BasicAuth:
+      type: "http"
+      scheme: "basic"
+    ApiKeyAuth:
+      type: "apiKey"
+      in: "header"
+      name: "X-API-Key"
+  schemas:
+    Any:
+      description: "Any JSON object not defined as schema"
+    PaginationMeta:
+      type: "object"
+      properties:
+        total:
+          type: "number"
+          example: 100
+          nullable: false
+        page:
+          type: "number"
+          example: 2
+          nullable: false
+        perPage:
+          type: "number"
+          example: 10
+          nullable: false
+        currentPage:
+          type: "number"
+          example: 3
+          nullable: false
+        lastPage:
+          type: "number"
+          example: 10
+          nullable: false
+        firstPage:
+          type: "number"
+          example: 1
+          nullable: false
+        lastPageUrl:
+          type: "string"
+          example: "/?page=10"
+          nullable: false
+        firstPageUrl:
+          type: "string"
+          example: "/?page=1"
+          nullable: false
+        nextPageUrl:
+          type: "string"
+          example: "/?page=6"
+          nullable: false
+        previousPageUrl:
+          type: "string"
+          example: "/?page=5"
+          nullable: false
+paths:
+  /uploads/*:
+    get:
+      summary: "route"
+      description: "\n\n __ - ****"
+      parameters: []
+      tags:
+        - "UPLOADS"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json: {}
+      security: []
+  /:
+    get:
+      summary: "route"
+      description: "\n\n __ - ****"
+      parameters: []
+      tags:
+        - ""
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json: {}
+      security: []
+  /auth/me:
+    get:
+      summary: "Get a single instance of auth (show)"
+      description: "\n\n _app/auth/controllers/me_controller.ts_ - **show**"
+      parameters: []
+      tags:
+        - "AUTH"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json: {}
+      security: []
+  /auth/register:
+    post:
+      summary: "Create auth (store)"
+      description: "\n\n _app/auth/controllers/register_controller.ts_ - **store**"
+      parameters: []
+      tags:
+        - "AUTH"
+      responses:
+        201:
+          description: "Created"
+          content:
+            application/json: {}
+      security: []
+      requestBody:
+        content:
+          application/json: {}
+  /auth/login:
+    post:
+      summary: "Create auth (store)"
+      description: "\n\n _app/auth/controllers/login_controller.ts_ - **store**"
+      parameters: []
+      tags:
+        - "AUTH"
+      responses:
+        201:
+          description: "Created"
+          content:
+            application/json: {}
+      security: []
+      requestBody:
+        content:
+          application/json: {}
+  /auth/logout:
+    delete:
+      summary: "Delete auth (destroy)"
+      description: "\n\n _app/auth/controllers/logout_controller.ts_ - **destroy**"
+      parameters: []
+      tags:
+        - "AUTH"
+      responses:
+        202:
+          description: "Accepted"
+          content:
+            application/json: {}
+      security: []
+  /plugins:
+    get:
+      summary: "Get a list of plugins (index)"
+      description: "\n\n _app/plugins/controllers/list_plugins_controller.ts_ - **index**"
+      parameters: []
+      tags:
+        - "PLUGINS"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json: {}
+      security: []
+    post:
+      summary: "Create plugins (store)"
+      description: "\n\n _app/plugins/controllers/store_plugin_controller.ts_ - **store**"
+      parameters: []
+      tags:
+        - "PLUGINS"
+      responses:
+        401:
+          description: "Returns **401** (Unauthorized)"
+        403:
+          description: "Returns **403** (Forbidden)"
+      security:
+        - BearerAuth:
+            - "access"
+      requestBody:
+        content:
+          application/json: {}
+  /plugins/{id}:
+    get:
+      summary: "Get a single instance of plugins (show)"
+      description: "\n\n _app/plugins/controllers/show_plugin_controller.ts_ - **show**"
+      parameters:
+        - in: "path"
+          name: "id"
+          schema:
+            type: "string"
+          required: true
+      tags:
+        - "PLUGINS"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json: {}
+      security: []
+  /plugins/{id}/download:
+    get:
+      summary: "Get a single instance of plugins (show)"
+      description: "\n\n _app/plugins/controllers/download_plugin_controller.ts_ - **show**"
+      parameters:
+        - in: "path"
+          name: "id"
+          schema:
+            type: "string"
+          required: true
+      tags:
+        - "PLUGINS"
+      responses:
+        401:
+          description: "Returns **401** (Unauthorized)"
+        403:
+          description: "Returns **403** (Forbidden)"
+      security:
+        - BearerAuth:
+            - "access"
+  /categories:
+    get:
+      summary: "Get a list of categories (index)"
+      description: "\n\n _app/categories/controllers/list_categories_controller.ts_ - **index**"
+      parameters: []
+      tags:
+        - "CATEGORIES"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json: {}
+      security: []
+    post:
+      summary: "Create categories (store)"
+      description: "\n\n _app/categories/controllers/store_category_controller.ts_ - **store**"
+      parameters: []
+      tags:
+        - "CATEGORIES"
+      responses:
+        201:
+          description: "Created"
+          content:
+            application/json: {}
+      security: []
+      requestBody:
+        content:
+          application/json: {}
+  /categories/{id}:
+    get:
+      summary: "Get a single instance of categories (show)"
+      description: "\n\n _app/categories/controllers/show_category_controller.ts_ - **show**"
+      parameters:
+        - in: "path"
+          name: "id"
+          schema:
+            type: "string"
+          required: true
+      tags:
+        - "CATEGORIES"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json: {}
+      security: []
+  /users:
+    get:
+      summary: "Get a list of users (index)"
+      description: "\n\n _app/users/controllers/list_users_controller.ts_ - **index**"
+      parameters: []
+      tags:
+        - "USERS"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json: {}
+      security: []
+  /users/{id}:
+    get:
+      summary: "Get a single instance of users (show)"
+      description: "\n\n _app/users/controllers/show_user_controller.ts_ - **show**"
+      parameters:
+        - in: "path"
+          name: "id"
+          schema:
+            type: "string"
+          required: true
+      tags:
+        - "USERS"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json: {}
+      security: []
+  /users/{id}/plugins:
+    get:
+      summary: "Get a list of users (index)"
+      description: "\n\n _app/users/controllers/list_user_plugins_controller.ts_ - **index**"
+      parameters:
+        - in: "path"
+          name: "id"
+          schema:
+            type: "string"
+          required: true
+      tags:
+        - "USERS"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json: {}
+      security: []
+tags:
+  - name: "UPLOADS"
+    description: "Everything related to UPLOADS"
+  - name: "AUTH"
+    description: "Everything related to AUTH"
+  - name: "PLUGINS"
+    description: "Everything related to PLUGINS"
+  - name: "CATEGORIES"
+    description: "Everything related to CATEGORIES"
+  - name: "USERS"
+    description: "Everything related to USERS"
