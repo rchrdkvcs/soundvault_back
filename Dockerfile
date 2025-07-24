@@ -31,6 +31,8 @@ WORKDIR /app
 
 COPY --from=production-deps /app/node_modules /app/node_modules
 COPY --from=build /app/build /app
+COPY --from=build /app/swagger.json /app/
+COPY --from=build /app/swagger.yml /app/
 
 EXPOSE 3333
 CMD ["node", "./bin/server.js"]
