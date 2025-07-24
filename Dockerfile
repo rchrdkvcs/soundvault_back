@@ -22,25 +22,13 @@ WORKDIR /app
 COPY --from=deps /app/node_modules /app/node_modules
 ADD . .
 
-# Generate docs BEFORE build (needs TypeScript source files)
-RUN echo 'NODE_ENV=production' > .env && \
-    echo 'PORT=3333' >> .env && \
-    echo 'HOST=0.0.0.0' >> .env && \
-    echo 'LOG_LEVEL=info' >> .env && \
-    echo 'APP_KEY=dummy_key_for_docs_generation_only' >> .env && \
-    echo 'DB_HOST=localhost' >> .env && \
-    echo 'DB_PORT=5432' >> .env && \
-    echo 'DB_USER=dummy' >> .env && \
-    echo 'DB_DATABASE=dummy' >> .env && \
-    echo 'DB_PASSWORD=dummy' >> .env && \
-    echo 'DRIVE_DISK=fs' >> .env && \
-    node ace docs:generate && \
-    rm .env
-
-RUN node ace build --ignore-ts-errors
+# Generate swagger files
+RUN node ace docs:generate
 
 # Copy swagger files to build directory
-RUN cp swagger.json build/swagger.json && cp swagger.yml build/swagger.yml
+RUN cp swagger.json /app/swagger.json && cp swagger.yml /app/swagger.yml
+
+RUN node ace build --ignore-ts-errors
 
 # Production stage
 FROM base
