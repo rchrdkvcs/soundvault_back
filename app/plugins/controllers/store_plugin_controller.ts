@@ -5,6 +5,14 @@ import { ulid } from 'ulid'
 import drive from '@adonisjs/drive/services/main'
 
 export default class StorePluginController {
+  /**
+   * @createPlugin
+   * @description Crée un nouveau plugin
+   * @requestBody <CreatePluginRequest>
+   * @responseBody 201 - <PluginCreatedResponse>
+   * @responseBody 400 - {"success": false, "message": "Validation failed"}
+   * @responseBody 401 - {"success": false, "message": "Unauthorized"}
+   */
   static validator = vine.compile(
     vine.object({
       // Basic info

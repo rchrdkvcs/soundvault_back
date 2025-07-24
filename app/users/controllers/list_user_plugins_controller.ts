@@ -4,6 +4,16 @@ import Plugin from '#plugins/models/plugin'
 import vine from '@vinejs/vine'
 
 export default class ListUserPluginsController {
+  /**
+   * @listUserPlugins
+   * @description Récupère la liste des plugins d'un utilisateur avec pagination
+   * @paramPath id - string - ID ou slug de l'utilisateur
+   * @queryParam page - number - Numéro de page (défaut: 1)
+   * @queryParam limit - number - Nombre d'éléments par page (défaut: 12, max: 50)
+   * @queryParam category - string - Filtrer par ID de catégorie
+   * @responseBody 200 - <UserPluginsListResponse>
+   * @responseBody 404 - {"success": false, "message": "Utilisateur introuvable"}
+   */
   async execute({ params, request, response }: HttpContext) {
     try {
       // Validation des paramètres

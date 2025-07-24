@@ -2,6 +2,13 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Category from '#categories/models/category'
 
 export default class ShowCategoryController {
+  /**
+   * @showCategory
+   * @description Récupère les détails d'une catégorie avec ses plugins
+   * @paramPath id - string - ID de la catégorie
+   * @responseBody 200 - <CategoryDetailResponse>
+   * @responseBody 404 - {"success": false, "message": "Catégorie introuvable"}
+   */
   async execute({ params, response }: HttpContext) {
     try {
       const category = await Category.query()

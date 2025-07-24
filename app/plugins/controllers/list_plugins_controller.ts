@@ -3,6 +3,21 @@ import Plugin from '#plugins/models/plugin'
 import vine from '@vinejs/vine'
 
 export default class ListPluginsController {
+  /**
+   * @summary Liste des plugins
+   * @description Récupère la liste des plugins avec filtres et pagination
+   * @operationId listPlugins
+   * @tags Plugins
+   * @queryParam search - string - Recherche textuelle dans le nom et description
+   * @queryParam category - string - Filtrer par ID de catégorie
+   * @queryParam author - string - Filtrer par ID d'auteur
+   * @queryParam sort - enum:name,date,downloads,newest,oldest,price-asc,price-desc - Tri
+   * @queryParam free - boolean - Filtrer par plugins gratuits
+   * @queryParam page - number - Numéro de page (défaut: 1)
+   * @queryParam limit - number - Nombre d'éléments par page (défaut: 12, max: 50)
+   * @responseBody 200 - {"success": true, "data": [], "meta": {"total": 0, "perPage": 12, "currentPage": 1, "lastPage": 1, "firstPage": 1, "hasNext": false, "hasPrev": false}}
+   * @responseBody 400 - {"success": false, "message": "Invalid parameters"}
+   */
   async execute({ request, response }: HttpContext) {
     try {
       // Validation des paramètres de requête

@@ -2,6 +2,13 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Plugin from '#plugins/models/plugin'
 
 export default class ShowPluginController {
+  /**
+   * @showPlugin
+   * @description Récupère les détails d'un plugin par son ID
+   * @paramPath id - string - ID du plugin
+   * @responseBody 200 - <PluginDetailResponse>
+   * @responseBody 404 - {"success": false, "message": "Plugin introuvable"}
+   */
   async execute({ params, response }: HttpContext) {
     try {
       const plugin = await Plugin.query()

@@ -26,6 +26,15 @@ export default class RegisterController {
     })
   )
 
+  /**
+   * @summary Enregistre un nouvel utilisateur
+   * @description Crée un compte utilisateur avec username, email et mot de passe
+   * @operationId registerUser
+   * @tags Authentication
+   * @requestBody {"username": "string", "email": "string", "password": "string", "confirmPassword": "string"}
+   * @responseBody 201 - {"user": {"id": "string", "email": "string", "username": "string", "slug": "string"}, "token": {"type": "Bearer", "name": "string", "hash": "string", "abilities": [], "lastUsedAt": null, "expiresAt": "datetime"}}
+   * @responseBody 422 - {"success": false, "message": "Validation failed", "errors": {}}
+   */
   public async execute({ request, response, auth }: HttpContext) {
     const data = await request.validateUsing(RegisterController.validator)
 

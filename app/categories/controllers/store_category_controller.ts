@@ -9,6 +9,13 @@ export default class StoreCategoryController {
     })
   )
 
+  /**
+   * @createCategory
+   * @description Crée une nouvelle catégorie
+   * @requestBody <CreateCategoryRequest>
+   * @responseBody 201 - <CategoryCreatedResponse>
+   * @responseBody 422 - {"success": false, "message": "Validation failed"}
+   */
   async execute({ request, response }: HttpContext) {
     const data = await request.validateUsing(StoreCategoryController.validator)
 
