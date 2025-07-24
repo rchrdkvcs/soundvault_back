@@ -5,7 +5,10 @@
       "Bash(git rm:*)",
       "Bash(npm info:*)",
       "Bash(node ace docs:generate:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(rm:*)",
+      "Bash(cp:*)"
     ],
     "deny": []
   }

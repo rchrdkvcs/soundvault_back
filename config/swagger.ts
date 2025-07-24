@@ -15,7 +15,7 @@ export default {
     description: 'API du projet SoundVault',
   },
   snakeCase: true,
-  debug: false,
+  debug: true,
   ignore: ['/swagger', '/docs'],
   preferredPutPatch: 'PUT',
   common: {
