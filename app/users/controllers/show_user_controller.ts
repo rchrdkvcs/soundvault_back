@@ -13,7 +13,18 @@ export default class ShowUserController {
    */
   async show({ params, response }: HttpContext) {
     try {
-      const user = await User.query().where('id', params.id).orWhere('slug', params.id).first()
+      // Déterminer si c'est un ULID (26 caractères) ou un slug
+      const isUlid =
+        params.id.length === 26 && /^[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$/i.test(params.id)
+
+      let user
+      if (isUlid) {
+        // Recherche par ID uniquement si c'est un ULID valide
+        user = await User.query().where('id', params.id).first()
+      } else {
+        // Recherche par slug uniquement, avec gestion de la casse
+        user = await User.query().whereILike('slug', params.id).first()
+      }
 
       if (!user) {
         return response.notFound({
